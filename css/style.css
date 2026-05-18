@@ -1,26 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
 
-/* 전체 테마 글꼴 및 기본 스무딩 처리 */
+/* PDF 가이드 맞춤 브라우저 기본 폰트 및 스타일 고도화 설정 */
 body {
-    font-family: 'Noto Sans KR', sans-serif;
+    font-family: 'Inter', 'Noto Sans KR', sans-serif;
     -webkit-font-smoothing: antialiased;
 }
 
-/* 원본 이미지의 시그니처 컬러를 추출하여 변수 및 클래스화 */
-:root {
-    --main-green: #49b766; /* 이미지 상단 배너 및 메인 버튼의 그린 톤 */
-    --point-blue: #1877f2; /* 댓글 등록 버튼의 쨍한 블루 톤 */
+/* 유틸리티 커스텀 마진 정렬 */
+.mx-auto-custom {
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.bg-custom-green {
-    background-color: var(--main-green) !important;
+/* 카드 호버 시 전문적인 애니메이션 효과 세부 조정 */
+.transition-all {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
-.bg-custom-blue {
-    background-color: var(--point-blue) !important;
-}
-
-/* 입력 필드 포커스 시 부드러운 아웃라인 트랜지션 정의 */
-input:focus, textarea:focus {
-    box-shadow: 0 0 0 2px rgba(73, 183, 102, 0.15);
+.bg-white:hover {
+    transform: translateY(-2px);
 }
