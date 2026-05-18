@@ -3,78 +3,167 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>우리반 소통 공간</title>
+    <title>EduAI Matcher | 대학생을 위한 작업별 최적 AI 매칭</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="bg-slate-100 min-h-screen flex flex-col">
+<body class="bg-slate-50 text-slate-900 flex flex-col min-h-screen">
 
-    <header class="bg-custom-green py-4 shadow-sm w-full text-center">
-        <h1 class="text-white text-xl md:text-2xl font-bold tracking-wide flex items-center justify-center gap-2">
-            🎈 우리반 소통 공간
-        </h1>
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <span class="text-xl font-bold tracking-tight text-indigo-600">EduAI</span>
+                <span class="text-xl font-medium text-slate-400">Matcher</span>
+            </div>
+            <span class="text-xs font-semibold bg-indigo-50 text-indigo-600 px-2.5 py-1 rounded-full">2026 Edition</span>
+        </div>
     </header>
 
-    <main class="flex-grow max-w-3xl w-full mx-auto px-4 py-8 space-y-6">
-        
-        <section class="bg-white rounded-xl border border-slate-200/80 p-6 shadow-sm">
-            <form onsubmit="return false;" class="space-y-4">
-                <div>
-                    <input type="text" 
-                           placeholder="이름을 입력하세요 (예: 1번 홍길동)" 
-                           class="w-full px-4 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:border-green-500 placeholder-slate-400 bg-white transition-colors">
-                </div>
-                <div>
-                    <textarea rows="4" 
-                              placeholder="친구들에게 하고 싶은 이야기를 자유롭게 적어보세요!" 
-                              class="w-full px-4 py-3 border border-slate-300 rounded-lg text-sm focus:outline-none focus:border-green-500 placeholder-slate-400 bg-white resize-none transition-colors"></textarea>
-                </div>
-                <div class="flex items-center space-x-2 py-1">
-                    <input type="file" id="file-upload" class="hidden">
-                    <label for="file-upload" class="cursor-pointer bg-slate-50 border border-slate-300 hover:bg-slate-100 text-slate-700 text-xs font-medium py-2 px-3 rounded transition-colors">
-                        파일 선택
-                    </label>
-                    <span class="text-xs text-slate-500">선택된 파일 없음</span>
-                </div>
-                <div>
-                    <button type="submit" class="w-full bg-custom-green hover:bg-green-600 text-white font-bold py-3 px-4 rounded-lg text-sm tracking-wide shadow-sm transition-colors">
-                        새 글 올리기
-                    </button>
-                </div>
-            </form>
-        </section>
+    <section class="bg-white border-b border-slate-200 py-12 md:py-20">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight mb-4 leading-tight">
+                과제할 때 어떤 AI 쓸지 고민될 때,<br class="md:hidden"> <span class="text-indigo-600">원클릭 매칭</span>
+            </h1>
+            <p class="text-base md:text-lg text-slate-500 max-w-xl mx-auto-custom">
+                대학 생활, 팀플, 시험공부의 효율을 극대화해 줄 카테고리별 검증된 최고의 AI 도구들을 지금 바로 확인하세요.
+            </p>
+        </div>
+    </section>
 
-        <section class="bg-white rounded-xl border border-slate-200/80 p-6 shadow-sm space-y-4">
-            <div>
-                <h2 class="text-base font-bold text-slate-900 tracking-tight">담임 선생님</h2>
-            </div>
-            <div class="pb-2">
-                <p class="text-sm text-slate-800 leading-relaxed">
-                    우리반 홈페이지에 온 걸 환영해! 이곳에 재미있는 사진과 글을 많이 남겨주렴. 😊
-                </p>
+    <main class="flex-grow max-w-6xl w-full mx-auto px-4 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-xs font-medium text-amber-700 bg-amber-50 px-2.5 py-1 rounded-md">디자인/팀플</span>
+                        <span class="text-xs text-slate-400">무료 크레딧 제공</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-1">PPT/발표 자료 제작</h3>
+                    <p class="text-sm text-slate-500 mb-4">개요만 입력하면 레이아웃과 이미지를 자동 생성하여 완성도 높은 슬라이드 구축</p>
+                    <div class="bg-slate-50 rounded-lg p-3.5 mb-4">
+                        <div class="text-xs text-slate-400 mb-1">추천 AI 도구</div>
+                        <div class="text-base font-bold text-indigo-600 flex items-center">
+                            Gamma <span class="text-xs text-slate-400 font-normal ml-2">(대안: Plus AI)</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed mb-6">
+                        💡 <strong class="text-slate-800">활용 팁:</strong> 텍스트 복붙만으로 템플릿을 잡아주므로 초안 작성 시간을 80% 이상 단축할 수 있습니다.
+                    </p>
+                </div>
+                <a href="https://gamma.app" target="_blank" class="w-full text-center bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2.5 px-4 rounded-lg text-sm transition-colors block">
+                    Gamma 바로가기
+                </a>
             </div>
 
-            <div class="bg-slate-50 rounded-lg p-4 space-y-4 border border-slate-100">
-                <div class="text-sm">
-                    <span class="font-bold text-slate-900 mr-2">반장:</span>
-                    <span class="text-slate-700">네 선생님! 열심히 활동하겠습니다!</span>
+            <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-xs font-medium text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md">리포트/논문</span>
+                        <span class="text-xs text-slate-400">실시간 웹 검색</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-1">자료조사 & 출처 검색</h3>
+                    <p class="text-sm text-slate-500 mb-4">단순 구글링 대신 학술 자료 및 최신 실시간 정보를 정확한 출처와 함께 요약</p>
+                    <div class="bg-slate-50 rounded-lg p-3.5 mb-4">
+                        <div class="text-xs text-slate-400 mb-1">추천 AI 도구</div>
+                        <div class="text-base font-bold text-indigo-600 flex items-center">
+                            Perplexity <span class="text-xs text-slate-400 font-normal ml-2">(대안: Gemini Deep Research)</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed mb-6">
+                        💡 <strong class="text-slate-800">활용 팁:</strong> 답변마다 매칭된 링크(출처)가 표기되므로 교수님께 제출할 리포트의 신뢰성을 확보하기 좋습니다.
+                    </p>
                 </div>
-                
-                <form onsubmit="return false;" class="flex items-center border border-slate-300 rounded-md bg-white overflow-hidden focus-within:border-blue-500 transition-colors">
-                    <input type="text" 
-                           placeholder="의견을 남겨주세요..." 
-                           class="flex-grow px-3 py-2 text-sm focus:outline-none bg-white placeholder-slate-400">
-                    <button type="submit" class="bg-custom-blue hover:bg-blue-600 text-white text-xs font-semibold px-4 py-2.5 transition-colors shrink-0">
-                        등록
-                    </button>
-                </form>
+                <a href="https://www.perplexity.ai" target="_blank" class="w-full text-center bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2.5 px-4 rounded-lg text-sm transition-colors block">
+                    Perplexity 바로가기
+                </a>
             </div>
-        </section>
 
+            <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-xs font-medium text-blue-700 bg-blue-50 px-2.5 py-1 rounded-md">시험공부/벼락치기</span>
+                        <span class="text-xs text-slate-400">PDF/유튜브 링크 분석</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-1">강의 노트 및 학습 보조</h3>
+                    <p class="text-sm text-slate-500 mb-4">교수님 강의 PDF, 필기, 녹음본을 학습 시켜 나만의 AI 요약 족보 및 예상 문제 생성</p>
+                    <div class="bg-slate-50 rounded-lg p-3.5 mb-4">
+                        <div class="text-xs text-slate-400 mb-1">추천 AI 도구</div>
+                        <div class="text-base font-bold text-indigo-600 flex items-center">
+                            NotebookLM <span class="text-xs text-slate-400 font-normal ml-2">(by Google)</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed mb-6">
+                        💡 <strong class="text-slate-800">활용 팁:</strong> 자료 업로드 후 '오디오 개요' 기능을 켜면 두 AI가 팟캐스트처럼 내용을 대화로 요약해 줍니다.
+                    </p>
+                </div>
+                <a href="https://notebooklm.google" target="_blank" class="w-full text-center bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2.5 px-4 rounded-lg text-sm transition-colors block">
+                    NotebookLM 바로가기
+                </a>
+            </div>
+
+            <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-xs font-medium text-purple-700 bg-purple-50 px-2.5 py-1 rounded-md">영상 과제/UCC</span>
+                        <span class="text-xs text-slate-400">텍스트 to 비디오</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-1">영상 제작 및 편집</h3>
+                    <p class="text-sm text-slate-500 mb-4">주제나 대본만 작성하면 AI 보이스 성우 더빙, 자막, 스톡 비디오 매칭을 올인원으로 해결</p>
+                    <div class="bg-slate-50 rounded-lg p-3.5 mb-4">
+                        <div class="text-xs text-slate-400 mb-1">추천 AI 도구</div>
+                        <div class="text-base font-bold text-indigo-600 flex items-center">
+                            invideo AI <span class="text-xs text-slate-400 font-normal ml-2">(대안: CapCut 웹버전)</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed mb-6">
+                        💡 <strong class="text-slate-800">활용 팁:</strong> 복잡한 타임라인 편집 없이 프롬프트 명령만으로 쇼츠나 홍보 영상 초안을 바로 뽑아낼 수 있습니다.
+                    </p>
+                </div>
+                <a href="https://invideo.io" target="_blank" class="w-full text-center bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2.5 px-4 rounded-lg text-sm transition-colors block">
+                    invideo AI 바로가기
+                </a>
+            </div>
+
+            <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-xs font-medium text-rose-700 bg-rose-50 px-2.5 py-1 rounded-md">컴공/교양 코딩</span>
+                        <span class="text-xs text-slate-400">AI 네이티브 에디터</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-1">코딩 과제 & 디버깅</h3>
+                    <p class="text-sm text-slate-500 mb-4">단순 코드 생성을 넘어 내 컴퓨터 안의 전체 프로젝트 에러를 스스로 추적하고 자동 완성</p>
+                    <div class="bg-slate-50 rounded-lg p-3.5 mb-4">
+                        <div class="text-xs text-slate-400 mb-1">추천 AI 도구</div>
+                        <div class="text-base font-bold text-indigo-600 flex items-center">
+                            Cursor <span class="text-xs text-slate-400 font-normal ml-2">(대안: Windsurf)</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed mb-6">
+                        💡 <strong class="text-slate-800">활용 팁:</strong> VS Code를 기반으로 제작되어 기존 개발 환경의 세팅과 단축키를 그대로 이식해 사용할 수 있습니다.
+                    </p>
+                </div>
+                <a href="https://www.cursor.com" target="_blank" class="w-full text-center bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2.5 px-4 rounded-lg text-sm transition-colors block">
+                    Cursor 바로가기
+                </a>
+            </div>
+
+            <div class="bg-slate-100 rounded-xl border border-dashed border-slate-300 p-6 flex flex-col items-center justify-center text-center opacity-70">
+                <svg class="w-8 h-8 text-slate-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <h3 class="text-sm font-semibold text-slate-700">새로운 카테고리 추가 예정</h3>
+                <p class="text-xs text-slate-400 mt-1">학생들에게 필요한 유용한 AI 카테고리가 지속적으로 업데이트됩니다.</p>
+            </div>
+
+        </div>
     </main>
 
-    <footer class="py-4 text-center text-xs text-slate-400">
-        © 2026 우리반 소통 공간. Powered by GitHub Pages.
+    <footer class="bg-white border-t border-slate-200 py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center text-xs text-slate-400 space-y-2">
+            <p>© 2026 EduAI Matcher. All rights reserved.</p>
+            <p class="max-w-2xl mx-auto leading-relaxed text-slate-400">
+                ⚠️ <strong class="text-slate-500">연구 윤리 공지:</strong> 본 사이트에서 소개하는 AI 도구는 학습 보조 및 초안 작성용입니다. AI가 생성한 결과물을 그대로 복붙하여 과제로 제출할 경우 대학 학칙 및 연구 윤리 위반(표절)에 해당할 수 있으므로 반드시 가공 및 검증을 거치시기 바랍니다.
+            </p>
+        </div>
     </footer>
 
 </body>
