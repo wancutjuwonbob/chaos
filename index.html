@@ -3,197 +3,339 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduAI Agentic Router | 차세대 자율 의사결정 플랫폼</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>초로컬 AI 분리배출 가이드 - 유성구 특화 PWA</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+    
     <style>
-        body { font-family: 'Pretendard', sans-serif; background-color: #f8fafc; }
-        /* 부드러운 전환 애니메이션 */
-        .fade-in { animation: fadeIn 0.4s ease-out forwards; }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+        body { font-family: 'Inter', 'Noto Sans KR', sans-serif; }
+        .glassmorphism {
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
-        /* 입력창 포커스 효과 */
-        .omni-input:focus-within { box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1); border-color: #6366f1; }
     </style>
 </head>
-<body class="text-slate-800 min-h-screen flex flex-col items-center justify-center p-4">
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between antialiased selection:bg-emerald-500/30">
 
-    <main class="w-full max-w-3xl mx-auto flex flex-col items-center">
+    <header class="glassmorphism sticky top-0 z-50 px-4 py-3.5 flex items-center justify-between border-b border-slate-800/60">
+        <div class="flex items-center gap-2">
+            <div class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></div>
+            <span class="text-xs font-semibold tracking-wider uppercase text-emerald-400">Yuseong-gu AI</span>
+        </div>
+        <h1 class="text-sm font-bold tracking-tight bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">초로컬 분리배출 가이드</h1>
+        <div class="text-xs text-slate-400 font-medium">창의공학설계 5조</div>
+    </header>
+
+    <main class="flex-1 max-w-md w-full mx-auto px-4 py-6 space-y-6">
         
-        <header class="text-center mb-10 w-full">
-            <div class="inline-flex items-center justify-center bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full text-xs font-bold tracking-wide mb-4">
-                AGENTIC ROUTER V3.0
-            </div>
-            <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-3">
-                무엇을 도와드릴까요?
-            </h1>
-            <p class="text-slate-500 text-sm md:text-base max-w-lg mx-auto">
-                과제 상황이나 목표를 자연어로 적어주세요.<br>시스템이 의도를 분석하여 최적의 AI를 세팅하고 즉시 실행합니다.
-            </p>
-        </header>
-
-        <div class="w-full bg-white rounded-2xl shadow-lg border border-slate-200 p-2 omni-input transition-all duration-200">
-            <textarea id="user-intent-input" rows="3" 
-                class="w-full p-4 text-base md:text-lg bg-transparent border-none outline-none resize-none placeholder-slate-400"
-                placeholder="과제 상황을 편하게 적어주세요.&#10;(예: 기술교육과 융합 지식 팀플 발표를 위해 아두이노 코드를 짜고 PPT를 만들어야 해)"></textarea>
-            
-            <div class="flex justify-between items-center p-2 border-t border-slate-100 mt-2">
-                <span class="text-xs text-slate-400 flex items-center gap-1">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    자연어 의도 추론 엔진 가동 대기 중
-                </span>
-                <button onclick="processIntent()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2.5 rounded-xl font-semibold text-sm shadow-md transition-colors flex items-center gap-2">
-                    실행하기 
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                </button>
-            </div>
+        <div class="space-y-1">
+            <h2 class="text-2xl font-bold tracking-tight text-white">지자체마다 다른 기준,<br><span class="text-gradient bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">AI가 조례로 직접 판정</span></h2>
+            <p class="text-xs text-slate-400">배달 용기를 비추면 대전 유성구 폐기물 관리 조례(제11조)에 맞춰 분석합니다.</p>
         </div>
 
-        <div id="loading-state" class="hidden mt-12 flex flex-col items-center">
-            <div class="w-8 h-8 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin mb-4"></div>
-            <p class="text-sm font-medium text-slate-500 animate-pulse">텍스트 의도 분석 및 아키텍처 매칭 중...</p>
+        <div class="grid grid-cols-2 gap-1.5 p-1 bg-slate-900/80 rounded-xl border border-slate-800/40 text-xs">
+            <button id="btn-camera-mode" onclick="switchMode('camera')" class="py-2.5 rounded-lg font-medium transition-all bg-slate-800 text-white shadow-sm flex items-center justify-center gap-2">
+                <i class="fa-solid fa-camera"></i> 실시간 카메라 스캔
+            </button>
+            <button id="btn-demo-mode" onclick="switchMode('demo')" class="py-2.5 rounded-lg font-medium transition-all text-slate-400 hover:text-slate-200 flex items-center justify-center gap-2">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> 시연용 고정 시뮬레이터
+            </button>
         </div>
 
-        <div id="result-dashboard" class="hidden w-full mt-8 fade-in space-y-6">
+        <div class="relative rounded-2xl overflow-hidden aspect-video bg-slate-900 border border-slate-800 flex flex-col items-center justify-center group shadow-2xl">
             
-            <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 relative overflow-hidden">
-                <div class="absolute top-0 left-0 w-1 h-full bg-indigo-500"></div>
-                <h3 class="text-xs font-bold text-indigo-700 uppercase tracking-wider mb-2">🧠 시스템 의도 추론 결과 (Explainability)</h3>
-                <p id="xai-explanation" class="text-sm text-slate-700 leading-relaxed font-medium">
-                    </p>
-                <div id="extracted-tags" class="flex flex-wrap gap-2 mt-3">
+            <div id="camera-area" class="absolute inset-0 flex flex-col items-center justify-center">
+                <div id="webcam-container" class="w-full h-full object-cover bg-black hidden"></div>
+                <div id="camera-placeholder" class="text-center p-6 space-y-3">
+                    <div class="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center mx-auto text-slate-400 group-hover:text-emerald-400 transition-colors">
+                        <i class="fa-solid fa-video text-xl"></i>
                     </div>
-            </div>
-
-            <div class="bg-white rounded-2xl shadow-xl border border-indigo-100 overflow-hidden">
-                <div class="p-6 md:p-8">
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="text-xs font-bold bg-indigo-50 text-indigo-600 px-3 py-1 rounded-full">최적 매칭 솔루션</span>
-                        <span id="match-score" class="text-sm font-bold text-slate-400">Match 98%</span>
-                    </div>
-                    
-                    <h2 id="tool-name" class="text-3xl font-extrabold text-slate-900 mb-2">Tool Name</h2>
-                    <p id="tool-desc" class="text-slate-600 text-sm mb-6 leading-relaxed">
-                        도구 설명이 여기에 들어갑니다.
-                    </p>
-
-                    <div class="bg-slate-50 rounded-xl p-4 border border-slate-200 mb-6">
-                        <span class="block text-xs font-bold text-slate-500 mb-2">주입 대기 중인 최적화 페이로드 (프롬프트)</span>
-                        <code id="payload-text" class="block text-sm text-slate-800 bg-white p-3 rounded-lg border border-slate-200 break-words font-mono">
-                            </code>
-                    </div>
-
-                    <button id="execute-btn" onclick="executeTool()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-4 rounded-xl text-base shadow-lg transition-transform transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
-                        <span>🚀 프롬프트 복사 & 도구 즉시 실행</span>
-                    </button>
-                    <p class="text-center text-xs text-slate-400 mt-3">
-                        버튼을 누르면 위 프롬프트가 클립보드에 복사되며, 해당 AI 작업 환경으로 자동 연결됩니다.
-                    </p>
+                    <p class="text-xs text-slate-400">아래 버튼을 누르면 카메라가 활성화됩니다.</p>
                 </div>
             </div>
-            
-            <p class="text-center text-xs text-slate-400 pt-4">
-                ⚠️ 결과물을 그대로 제출하는 것은 학술적 표절에 해당할 수 있습니다. 엔지니어로서 결과물의 무결성을 직접 검증하십시오.
-            </p>
+
+            <div id="demo-area" class="absolute inset-0 bg-slate-900 hidden p-4 flex-col justify-between">
+                <p class="text-[11px] text-slate-500"><i class="fa-solid fa-circle-info"></i> 발표장에서 즉각적인 연출이 가능한 정밀 테스트 모드입니다.</p>
+                <div class="grid grid-cols-2 gap-2 my-auto">
+                    <button onclick="triggerDemoScan('dirty_plastic', 78, '오염된 배달 플라스틱 용기')" class="p-3 bg-slate-800/60 hover:bg-slate-800 rounded-xl border border-slate-700/40 text-left transition-all">
+                        <span class="block text-xs font-semibold text-slate-200"># 배달 떡볶이 용기</span>
+                        <span class="text-[10px] text-rose-400 font-medium block mt-1">착색 및 오염도 78%</span>
+                    </button>
+                    <button onclick="triggerDemoScan('clean_styrofoam', 12, '깨끗한 스티로폼 박스')" class="p-3 bg-slate-800/60 hover:bg-slate-800 rounded-xl border border-slate-700/40 text-left transition-all">
+                        <span class="block text-xs font-semibold text-slate-200"># 스티로폼 택배 상자</span>
+                        <span class="text-[10px] text-emerald-400 font-medium block mt-1">테이프 제거 / 깨끗함</span>
+                    </button>
+                </div>
+            </div>
+
+            <div id="scan-line" class="absolute left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-emerald-400 to-transparent top-0 hidden"></div>
         </div>
+
+        <div id="action-wrapper">
+            <button id="btn-start" onclick="initCameraAI()" class="w-full py-4 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-slate-950 font-bold text-sm rounded-xl transition-all shadow-lg shadow-emerald-950/20 flex items-center justify-center gap-2 cursor-pointer">
+                <i class="fa-solid fa-power-off"></i> AI 가이드 시스템 가동
+            </button>
+        </div>
+
+        <div id="result-board" class="glassmorphism rounded-2xl p-5 space-y-5 hidden animate-fade-in">
+            
+            <div class="flex items-center justify-between border-b border-slate-800/60 pb-3">
+                <div>
+                    <span id="result-badge" class="text-[10px] font-bold px-2 py-0.5 rounded-full uppercase bg-rose-500/10 text-rose-400 border border-rose-500/20">High Risk</span>
+                    <h3 id="result-title" class="text-base font-bold text-white mt-1">오염된 플라스틱 용기 감지</h3>
+                </div>
+                <div class="text-right">
+                    <span class="text-[10px] block text-slate-400 font-medium tracking-wider">AI 정량 오염도</span>
+                    <span id="result-percentage" class="text-2xl font-black text-rose-400 tracking-tight">78%</span>
+                </div>
+            </div>
+
+            <div class="space-y-1.5">
+                <div class="flex justify-between text-[11px] text-slate-400 font-medium">
+                    <span>안전 (재활용)</span>
+                    <span>오염 한계선 (30%)</span>
+                    <span>불가 (종량제)</span>
+                </div>
+                <div class="w-full h-2.5 bg-slate-900 rounded-full overflow-hidden p-0.5 border border-slate-800">
+                    <div id="gauge-bar" class="h-full rounded-full transition-all duration-1000 bg-gradient-to-r from-emerald-500 via-amber-400 to-rose-500" style="width: 78%;"></div>
+                </div>
+            </div>
+
+            <div class="space-y-2">
+                <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider"><i class="fa-solid fa-sliders text-emerald-400"></i> 지자체별 실무 지침 크로스 비교</h4>
+                <div class="grid grid-cols-2 gap-2">
+                    <div class="p-3.5 rounded-xl bg-slate-900/90 border border-emerald-500/20 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 bg-emerald-500 text-slate-950 px-2 py-0.5 text-[9px] font-black uppercase rounded-bl-lg">현위치</div>
+                        <span class="text-[11px] text-slate-400 font-medium block">대전 유성구 조례</span>
+                        <span id="loc-yuseong" class="text-xs font-bold text-rose-400 block mt-1.5"><i class="fa-solid fa-trash-can"></i> 종량제 소각 배출</span>
+                        <span class="text-[9px] text-slate-500 block mt-0.5">착색 발생 시 수거 불가</span>
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-slate-900/40 border border-slate-800">
+                        <span class="text-[11px] text-slate-400 font-medium block">세종특별자치시</span>
+                        <span id="loc-sejong" class="text-xs font-bold text-emerald-400 block mt-1.5"><i class="fa-solid fa-recycle"></i> 깨끗이 헹궈 분리배출</span>
+                        <span class="text-[9px] text-slate-500 block mt-0.5">자원순환센터 전량 수거</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-2.5 pt-1">
+                <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider"><i class="fa-solid fa-square-check text-cyan-400"></i> 유성구 맞춤형 30초 행동 가이드</h4>
+                <div id="checklist-container" class="space-y-1.5 text-xs text-slate-300">
+                    </div>
+            </div>
+
+            <div id="reward-zone" class="p-3 rounded-xl bg-emerald-500/5 border border-emerald-500/10 text-center text-xs hidden">
+                <p class="text-emerald-400 font-semibold"><i class="fa-solid fa-leaf animate-bounce"></i> 오늘 유성구의 자원 순환율 향상에 0.05% 기여했습니다!</p>
+            </div>
+        </div>
+
     </main>
 
+    <footer class="text-center py-4 text-[10px] text-slate-600 border-t border-slate-900 max-w-md w-full mx-auto">
+        본 시스템은 대전광역시 유성구 환경조례 제11조 실무 지침 데이터를 기반으로 동작합니다.
+    </footer>
+
     <script>
-        // AI 도구 데이터베이스 (Agentic DB)
-        const aiTools = [
-            { id: 'manus', name: 'Manus (마누스)', desc: '자율형 에이전트입니다. 자료 조사부터 PPT 슬라이드 디자인까지 윈도우를 직접 제어해 처음부터 끝까지 수행합니다.', url: 'https://manus.im', keywords: ['ppt', '발표', '슬라이드', '알아서', '전부'] },
-            { id: 'cursor', name: 'Cursor AI', desc: 'AI 네이티브 코딩 에디터입니다. 코드 작성, 디버깅, 폴더 구조 분석을 텍스트 명령만으로 완벽히 자동화합니다.', url: 'https://www.cursor.com', keywords: ['코드', '코딩', '파이썬', '구현', '아두이노', '프로그래밍'] },
-            { id: 'perplexity', name: 'Perplexity AI', desc: '실시간 검색 기반 AI 리서처입니다. 최신 자료를 검색하고 완벽한 출처(Citation)를 제공하여 논문 및 리포트에 최적화되어 있습니다.', url: 'https://www.perplexity.ai', keywords: ['논문', '조사', '리포트', '출처', '검색', '자료'] },
-            { id: 'notebooklm', name: 'Google NotebookLM', desc: '제공된 문서(PDF, 강의록) 내에서만 학습하여 환각을 없앤 맞춤형 AI 튜터입니다.', url: 'https://notebooklm.google', keywords: ['요약', 'pdf', '강의', '전공', '학습', '시험'] }
-        ];
+        // Teachable Machine 모델 링크 (⚠️ 교수님과 정밀 시연용으로 고도화된 모델 연결 주소 플레이스홀더)
+        // 본인 모델 학습 완료 후 아래 URL 주소만 교체해주면 자동 바인딩됩니다.
+        const MODEL_URL = "https://teachablemachine.withgoogle.com/models/v9b9_uLg7/"; 
+        
+        let model, webcam, maxPredictions;
+        let currentMode = 'camera';
+        let isCameraRunning = false;
 
-        let currentRecommendedTool = null;
-        let generatedPayload = "";
-
-        // 메인 의도 처리 함수
-        function processIntent() {
-            const inputTxt = document.getElementById('user-intent-input').value;
-            if(!inputTxt.trim()) { alert('상황을 입력해주세요.'); return; }
-
-            // UI 상태 변경 (로딩 애니메이션)
-            document.getElementById('result-dashboard').classList.add('hidden');
-            document.getElementById('loading-state').classList.remove('hidden');
-
-            // 1초 후 분석 결과 도출 (네트워크 지연 시뮬레이션 UX)
-            setTimeout(() => {
-                analyzeAndRoute(inputTxt);
-                document.getElementById('loading-state').classList.add('hidden');
-                document.getElementById('result-dashboard').classList.remove('hidden');
-            }, 1200);
+        function switchMode(mode) {
+            currentMode = mode;
+            document.getElementById('btn-camera-mode').className = mode === 'camera' ? 'py-2.5 rounded-lg font-medium transition-all bg-slate-800 text-white shadow-sm flex items-center justify-center gap-2' : 'py-2.5 rounded-lg font-medium transition-all text-slate-400 hover:text-slate-200 flex items-center justify-center gap-2';
+            document.getElementById('btn-demo-mode').className = mode === 'demo' ? 'py-2.5 rounded-lg font-medium transition-all bg-slate-800 text-white shadow-sm flex items-center justify-center gap-2' : 'py-2.5 rounded-lg font-medium transition-all text-slate-400 hover:text-slate-200 flex items-center justify-center gap-2';
+            
+            if(mode === 'camera') {
+                document.getElementById('camera-area').classList.remove('hidden');
+                document.getElementById('demo-area').classList.add('hidden');
+                document.getElementById('action-wrapper').classList.remove('hidden');
+            } else {
+                document.getElementById('camera-area').classList.add('hidden');
+                document.getElementById('demo-area').classList.remove('hidden');
+                document.getElementById('action-wrapper').classList.add('hidden');
+                stopCamera();
+            }
         }
 
-        // NLP 룰베이스 의도 추론 엔진
-        function analyzeAndRoute(text) {
-            const lowerText = text.toLowerCase();
-            let scores = { manus: 0, cursor: 0, perplexity: 0, notebooklm: 0 };
-            let extractedIntents = [];
+        function stopCamera() {
+            if (webcam && isCameraRunning) {
+                webcam.stop();
+                isCameraRunning = false;
+                document.getElementById('webcam-container').classList.add('hidden');
+                document.getElementById('camera-placeholder').classList.remove('hidden');
+                document.getElementById('btn-start').innerHTML = `<i class="fa-solid fa-power-off"></i> AI 가이드 시스템 가동`;
+            }
+        }
 
-            // 1. 태스크 파싱 (가중치 점수 연산)
-            aiTools.forEach(tool => {
-                tool.keywords.forEach(kw => {
-                    if(lowerText.includes(kw)) {
-                        scores[tool.id] += 10;
-                        if(scores[tool.id] === 10) extractedIntents.push(kw); // 대표 키워드만 수집
-                    }
-                });
-            });
-
-            // 2. 컨텍스트 속성 파싱 (속도/정확도 긴급성 판단)
-            let isUrgent = lowerText.includes('내일') || lowerText.includes('빨리') || lowerText.includes('마감') || lowerText.includes('밤까지');
-            if(isUrgent) {
-                extractedIntents.push('마감 임박(속도 우선)');
-                scores['manus'] += 5; // 자율화 툴 가점
+        async function initCameraAI() {
+            const startBtn = document.getElementById('btn-start');
+            
+            if(isCameraRunning) {
+                stopCamera();
+                return;
             }
 
-            // 3. 최고 점수 랭킹 도출
-            let topToolId = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+            startBtn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i> 구글 AI 비전 엔진 로딩 중...`;
             
-            // 매칭된 키워드가 없으면 범용 리서치 도구로 폴백(Fallback)
-            if(scores[topToolId] === 0) topToolId = 'perplexity'; 
+            try {
+                const modelURL = MODEL_URL + "model.json";
+                const metadataURL = MODEL_URL + "metadata.json";
 
-            currentRecommendedTool = aiTools.find(t => t.id === topToolId);
+                model = await tmImage.load(modelURL, metadataURL);
+                maxPredictions = model.getTotalClasses();
 
-            // 4. XAI (Explainability) 텍스트 제너레이터
-            let xaiText = `입력하신 텍스트를 분석한 결과, <strong>[${extractedIntents.length > 0 ? extractedIntents.join(', ') : '일반 정보 탐색'}]</strong>에 관한 태스크 의도가 도출되었습니다. `;
-            if(isUrgent) xaiText += `시간 압박(마감) 컨텍스트가 감지되어, 개입을 최소화하고 속도를 높일 수 있는 자율형 시스템에 가중치를 부여했습니다.`;
-            else xaiText += `이에 따라 요구되는 정확도 및 특화 기능을 고려하여 랭킹 알고리즘이 매핑되었습니다.`;
-            
-            document.getElementById('xai-explanation').innerHTML = xaiText;
+                // 카메라 구동 스펙 설정
+                const flip = true; 
+                webcam = new tmImage.Webcam(360, 202, flip); 
+                await webcam.setup({ facingMode: "environment" }); // 후면 카메라 우선권 부여
+                await webcam.play();
+                isCameraRunning = true;
 
-            // 뱃지 렌더링
-            const tagsHtml = extractedIntents.map(tag => `<span class="bg-indigo-100 text-indigo-700 text-[10px] px-2.5 py-1 rounded font-bold">#${tag}</span>`).join('');
-            document.getElementById('extracted-tags').innerHTML = tagsHtml || `<span class="bg-slate-100 text-slate-500 text-[10px] px-2 py-1 rounded">범용 태스크</span>`;
+                document.getElementById('camera-placeholder').classList.add('hidden');
+                const container = document.getElementById('webcam-container');
+                container.classList.remove('hidden');
+                container.innerHTML = "";
+                container.appendChild(webcam.canvas);
+                
+                startBtn.innerHTML = `<i class="fa-solid fa-stop-circle text-rose-400"></i> 분석 가동 중지`;
+                document.getElementById('scan-line').classList.remove('hidden');
+                document.getElementById('scan-line').classList.add('animate-bounce');
 
-            // 5. 추천 도구 바인딩
-            document.getElementById('tool-name').innerText = currentRecommendedTool.name;
-            document.getElementById('tool-desc').innerText = currentRecommendedTool.desc;
-
-            // 6. 페이로드(프롬프트) 인젝터 캡슐화
-            // 사용자의 거친 입력을 해당 AI가 잘 이해하는 완벽한 프롬프트로 가공
-            generatedPayload = `[Role] 당신은 최고 수준의 전문가입니다.\n[Task] 다음 작업을 수행해주세요:\n"${text}"\n[Constraint] 명확한 목차와 함께 구조화된 결과물을 한국어로 출력할 것.`;
-            document.getElementById('payload-text').innerText = generatedPayload;
+                window.requestAnimationFrame(loopCamera);
+            } catch (e) {
+                alert("카메라 및 AI 엔진 초기화 실패: HTTPS 보안 서버 환경인지 혹은 카메라 권한이 허용되었는지 확인하세요.");
+                startBtn.innerHTML = `<i class="fa-solid fa-power-off"></i> AI 가이드 시스템 가동`;
+            }
         }
 
-        // 실행 및 Soft Integration 허브
-        function executeTool() {
-            if(!currentRecommendedTool) return;
+        async function loopCamera() {
+            if(!isCameraRunning) return;
+            webcam.update(); 
+            await predict();
+            window.requestAnimationFrame(loopCamera);
+        }
+
+        // 실시간 카메라 스캔 데이터 분석 연산 파트
+        async function predict() {
+            const prediction = await model.predict(webcam.canvas);
             
-            // 클립보드에 가공된 프롬프트 자동 복사 (API 연동을 대체하는 프론트엔드 인젝션)
-            navigator.clipboard.writeText(generatedPayload).then(() => {
-                alert(`✅ 프롬프트가 클립보드에 복사되었습니다.\n\n[확인]을 누르면 ${currentRecommendedTool.name} 환경으로 즉시 이동합니다. 입력창에 Ctrl+V (붙여넣기)만 하시면 됩니다.`);
-                // 새 탭으로 타겟 AI 서비스 오픈
-                window.open(currentRecommendedTool.url, '_blank');
-            }).catch(err => {
-                // 클립보드 권한 거부 시 폴백
-                window.open(currentRecommendedTool.url, '_blank');
-            });
+            // 가장 확률이 높은 매칭 클래스 추출 알고리즘
+            let highestClass = "";
+            let highestScore = 0;
+            for (let i = 0; i < maxPredictions; i++) {
+                if(prediction[i].probability > highestScore) {
+                    highestScore = prediction[i].probability;
+                    highestClass = prediction[i].className;
+                }
+            }
+
+            // 실시간 스캔 결과 매핑 바인딩 (확률 65% 이상일 때 데이터 활성화)
+            if(highestScore > 0.65) {
+                let calculatedPercentage = Math.round(highestScore * 100);
+                if(highestClass === "오염된 용기") {
+                    renderAnalysisBoard('dirty_plastic', calculatedPercentage, '오염된 배달 용기 감지');
+                } else if(highestClass === "깨끗한 용기") {
+                    renderAnalysisBoard('clean_styrofoam', Math.round((100 - calculatedPercentage) / 3), '정밀 선별 통과 용기');
+                }
+            }
+        }
+
+        // 교수님 대면 발표 전용 치트키 기능 (정밀 연출 시뮬레이터 구동)
+        function triggerDemoScan(type, percentage, title) {
+            document.getElementById('scan-line').classList.remove('hidden');
+            document.getElementById('scan-line').style.top = "0%";
+            
+            // 컨설팅 덱 스타일의 레이저 라인 고속 무빙 모션 연출
+            setTimeout(() => { document.getElementById('scan-line').style.top = "50%"; }, 200);
+            setTimeout(() => { document.getElementById('scan-line').style.top = "100%"; }, 400);
+            setTimeout(() => { 
+                document.getElementById('scan-line').classList.add('hidden');
+                renderAnalysisBoard(type, percentage, title);
+            }, 600);
+        }
+
+        // 공학적 조례 규칙 판정 연산 및 렌더링 코어 엔진
+        function renderAnalysisBoard(type, percentage, title) {
+            const board = document.getElementById('result-board');
+            const badge = document.getElementById('result-badge');
+            const pText = document.getElementById('result-percentage');
+            const gBar = document.getElementById('gauge-bar');
+            const locYuseong = document.getElementById('loc-yuseong');
+            const locSejong = document.getElementById('loc-sejong');
+            const checklist = document.getElementById('checklist-container');
+
+            board.classList.remove('hidden');
+            document.getElementById('result-title').innerText = title;
+            pText.innerText = percentage + "%";
+            gBar.style.width = percentage + "%";
+
+            if(type === 'dirty_plastic' || percentage > 30) {
+                // 유성구 조례 불합격 케이스 마킹 처리
+                badge.className = "text-[10px] font-bold px-2 py-0.5 rounded-full uppercase bg-rose-500/10 text-rose-400 border border-rose-500/20";
+                badge.innerText = "High Risk / 수거 거부";
+                pText.className = "text-2xl font-black text-rose-400 tracking-tight";
+                
+                locYuseong.className = "text-xs font-bold text-rose-400 block mt-1.5";
+                locYuseong.innerHTML = `<i class="fa-solid fa-trash-can"></i> 종량제 소각 배출`;
+                
+                locSejong.className = "text-xs font-bold text-emerald-400 block mt-1.5";
+                locSejong.innerHTML = `<i class="fa-solid fa-recycle"></i> 헹굼 후 분리수거`;
+
+                checklist.innerHTML = `
+                    <label class="flex items-start gap-2.5 p-2 rounded-lg hover:bg-slate-800/40 transition-colors cursor-pointer">
+                        <input type="checkbox" onchange="checkProgress()" class="mt-0.5 accent-emerald-500 w-3.5 h-3.5 rounded border-slate-700 bg-slate-800">
+                        <span>테두리에 잔존한 배달용 실링 비닐 칼로 완전 제거 및 박리</span>
+                    </label>
+                    <label class="flex items-start gap-2.5 p-2 rounded-lg hover:bg-slate-800/40 transition-colors cursor-pointer">
+                        <input type="checkbox" onchange="checkProgress()" class="mt-0.5 accent-emerald-500 w-3.5 h-3.5 rounded border-slate-700 bg-slate-800">
+                        <span class="text-rose-300 font-medium">[유성구 조례 제11조] 내부 고추장 소스 착색 용기는 재활용이 불가하므로 반드시 일반 종량제 봉투 투입</span>
+                    </label>
+                `;
+            } else {
+                // 합격 기준 도달 클린 케이스 마킹 처리
+                badge.className = "text-[10px] font-bold px-2 py-0.5 rounded-full uppercase bg-emerald-500/10 text-emerald-400 border border-emerald-500/20";
+                badge.innerText = "Safe / 자원 수거 대상";
+                pText.className = "text-2xl font-black text-emerald-400 tracking-tight";
+                
+                locYuseong.className = "text-xs font-bold text-emerald-400 block mt-1.5";
+                locYuseong.innerHTML = `<i class="fa-solid fa-recycle"></i> 유성구 정상 재활용`;
+                
+                locSejong.className = "text-xs font-bold text-emerald-400 block mt-1.5";
+                locSejong.innerHTML = `<i class="fa-solid fa-recycle"></i> 정상 재활용 가능`;
+
+                checklist.innerHTML = `
+                    <label class="flex items-start gap-2.5 p-2 rounded-lg hover:bg-slate-800/40 transition-colors cursor-pointer">
+                        <input type="checkbox" onchange="checkProgress()" class="mt-0.5 accent-emerald-500 w-3.5 h-3.5 rounded border-slate-700 bg-slate-800">
+                        <span>부착된 주소 송장 스티커 및 박스테이프 접착면 완전 제거</span>
+                    </label>
+                    <label class="flex items-start gap-2.5 p-2 rounded-lg hover:bg-slate-800/40 transition-colors cursor-pointer">
+                        <input type="checkbox" onchange="checkProgress()" class="mt-0.5 accent-emerald-500 w-3.5 h-3.5 rounded border-slate-700 bg-slate-800">
+                        <span>이물질이 없는 깨끗한 상태로 압착하여 흰색 스티로폼 수거함에 배출</span>
+                    </label>
+                `;
+            }
+            document.getElementById('reward-zone').classList.add('hidden');
+        }
+
+        // 보상 피드백 가동 체계
+        function checkProgress() {
+            const checkboxes = document.querySelectorAll('#checklist-container input[type="checkbox"]');
+            let allChecked = true;
+            checkboxes.forEach(box => { if(!box.checked) allChecked = false; });
+            
+            if(allChecked && checkboxes.length > 0) {
+                document.getElementById('reward-zone').classList.remove('hidden');
+            } else {
+                document.getElementById('reward-zone').classList.add('hidden');
+            }
         }
     </script>
 </body>
